@@ -1,0 +1,7 @@
+# S15 tests a leaked-credentials scenario: its "secrets" are synthetic and appear in the published traces too.
+version: 2
+secret:
+  ignored-paths:
+    - data/scenarios/S15_leaked_db_credentials.yaml
+    - results/**/traces.jsonl
+    - results/**/failures.md

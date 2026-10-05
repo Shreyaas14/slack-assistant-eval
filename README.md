@@ -70,6 +70,9 @@ A deployed proactive bot never sees a "scenario". It receives message events fro
 Checkpoints replay the same conversation at another moment (earlier, at a first sweep, or later). Each is labeled on
 its own: a main item may assume Centaur stayed silent at an earlier checkpoint where speaking was gold.
 
+All data is synthetic. The credentials in S15 (the leaked-secret scenario) are fabricated and safe to publish;
+`.gitguardian.yaml` tells secret scanners so.
+
 ## Repo map
 
 ```
