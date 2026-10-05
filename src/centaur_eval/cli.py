@@ -56,7 +56,10 @@ def cmd_baselines(args) -> int:
 def run_dir_arg(value: str) -> Path:
     """A run directory, or a bare run id under runs/."""
     path = Path(value)
-    return path if path.exists() or path.parent != Path(".") else RUNS_DIR / value
+    path = path if path.exists() or path.parent != Path(".") else RUNS_DIR / value
+    if not (path / "manifest.json").exists():
+        raise ValueError(f"no run at {value} (bare ids are looked up in runs/; pass a path like results/opus-5.5)")
+    return path
 
 
 def positive_int(value: str) -> int:

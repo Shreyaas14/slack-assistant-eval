@@ -68,7 +68,7 @@ def dataset_sha(scenarios: list[Scenario]) -> str:
 
 
 def principle_ids() -> set[str]:
-    """Rule ids defined in policy.md: list items that open with a bold id and a dash ("- **AUTH** —", "- **D1 — ")."""
+    """Rule ids defined in policy.md: list items opening with a bold id and a dash ("- **AUTH** —")."""
     rule = re.compile(r"^- \*\*([A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)*)(?:\*\*)? —", re.MULTILINE)
     return set(rule.findall((PROMPTS_DIR / "policy.md").read_text()))
 

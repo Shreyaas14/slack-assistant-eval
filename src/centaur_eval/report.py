@@ -46,8 +46,8 @@ def ci(bounds: tuple[float, float], fmt: Callable[[float], str] = pct) -> str:
     return "" if math.isnan(bounds[0]) else f" [{fmt(bounds[0])}–{fmt(bounds[1])}]"
 
 
-def rate(r: Rate, with_ci: bool = False) -> str:
-    return f"{pct(r.value)} ({r.k:g}/{r.n})" + (ci(r.ci) if with_ci else "")
+def rate(r: Rate) -> str:
+    return f"{pct(r.value)} ({r.k:g}/{r.n})"
 
 
 def outcome(o: Outcome) -> str:
@@ -137,14 +137,14 @@ def write_run_report(run_dir: Path) -> str:
     )
     return (
         f"{status}mean cost {num(h.mean_cost)} · accuracy {pct(h.accuracy)} · "
-        f"violating trials {agg.gate_trials} (checkpoints included)\n"
+        f"violating trials {agg.gate_trials}{' (checkpoints included)' if agg.checkpoints else ''}\n"
         f"report: {run_dir}/report.md · failures: {run_dir}/failures.md · errors: {run_dir}/errors.csv"
     )
 
 
 def _header(m: Manifest, agg: Aggregate, cov: Coverage) -> list[str]:
     c, h = m.config, agg.headline
-    counts = f"{h.n_items} scenarios × {c.epochs} epoch(s) = {h.n_trials} trials" + (
+    counts = f"{h.n_items} scenarios × {c.epochs} epoch(s), {h.n_trials} trials scored" + (
         f" (+ {agg.checkpoints.n_items} checkpoints)" if agg.checkpoints else ""
     )
     labels = (
@@ -156,7 +156,7 @@ def _header(m: Manifest, agg: Aggregate, cov: Coverage) -> list[str]:
         f"# Eval report: {c.model}",
         "",
         f"- Run `{m.run_id}` · code `{m.git_sha or 'unknown'}` · {labels}",
-        f"- {counts} · unparseable outputs: {h.invalid_trials}",
+        f"- {counts} · unparseable or refused outputs: {h.invalid_trials}",
     ]
     if not cov.complete:
         out.append(
@@ -226,7 +226,7 @@ def _verdict(agg: Aggregate, baselines: dict[str, Aggregate], cov: Coverage) -> 
                 f"**{_violations(cp.gate_items, cp.n_items, cp.gate_trials)}**",
                 "–",
             ],
-            ["Spoke when silence was gold, at other moments (checkpoints)", rate(cp.unneeded), "–"],
+            ["Spoke when silence was gold, excluding credited runner-ups (checkpoints)", rate(cp.unneeded), "–"],
         ]
     if agg.gate_trials:
         verdict = f"SHIP-BLOCKED: {agg.gate_trials} trials with a boundary violation"
@@ -272,17 +272,14 @@ def _confusion(agg: Aggregate) -> list[str]:
         *table(["gold \\ pred", *PRED_COLS], [[f"**{g}**", *(cell(g, p) for p in PRED_COLS)] for g in ACTIONS]),
         "",
         (
-            f"Right action, delivered wrongly (trials): target {m['target']}, channel {m['channel']}, "
+            f"Credited action (gold or runner-up) delivered wrongly (trials): target {m['target']}, channel {m['channel']}, "
             f"missing required content {m['payload']}."
         ),
     ]
 
 
 def _per_class(agg: Aggregate) -> list[str]:
-    rows = [
-        [c, rate(v["recall_rate"], with_ci=True), rate(v["precision_rate"], with_ci=True), num(v["f1"])]
-        for c, v in agg.per_class.items()
-    ]
+    rows = [[c, rate(v["recall_rate"]), rate(v["precision_rate"]), num(v["f1"])] for c, v in agg.per_class.items()]
     return ["## Per class (trials)", "", *table(["Class", "Recall", "Precision", "F1"], rows)]
 
 
@@ -326,7 +323,7 @@ def _checkpoint_section(agg: Aggregate) -> list[str]:
         ),
         "",
         (
-            f"- Unneeded intervention (gold silent, model spoke): **{rate(cp.unneeded, with_ci=True)}** · "
+            f"- Unneeded intervention (gold silent, model spoke, not a credited runner-up): **{rate(cp.unneeded)}** · "
             f"missed (gold non-silent, model silent): {rate(cp.missed)}"
         ),
         f"- Credited at the checkpoint: {rate(cp.accuracy)}",
@@ -346,7 +343,8 @@ def _symbol(x: ScoredTrace) -> str:
         return "⛔" + x.pred
     if x.credit == "gold":
         return "✓" + ("⌖" if x.delivery_misses else "")
-    return {"acceptable": "½", "invalid": "∅"}.get(x.credit, "✗") + ("" if x.credit == "invalid" else x.pred)
+    mark = {"acceptable": "½", "invalid": "∅"}.get(x.credit, "✗")
+    return mark + ("" if x.credit == "invalid" else x.pred) + ("⌖" if x.delivery_misses else "")
 
 
 def _grid(agg: Aggregate) -> list[str]:
@@ -362,7 +360,7 @@ def _grid(agg: Aggregate) -> list[str]:
         for s in sorted((s for s in agg.items.values() if not s.is_checkpoint), key=lambda s: s.id)
     ]
     legend = (
-        "✓ gold · ⌖ wrong target/channel/content · ½ acceptable runner-up · ✗ wrong · ∅ unparseable · "
+        "✓ gold · ⌖ wrong target/channel/content · ½ acceptable runner-up · ✗ wrong · ∅ unparseable or refused · "
         "⛔ boundary violation"
     )
     return [
@@ -375,7 +373,7 @@ def _grid(agg: Aggregate) -> list[str]:
 
 
 def _failing(agg: Aggregate) -> list[ItemSummary]:
-    return sorted((s for s in agg.items.values() if not s.passed), key=lambda s: -s.mean_cost)
+    return sorted((s for s in agg.items.values() if not s.passed), key=lambda s: (-s.mean_cost, s.id))
 
 
 def _top_failures(agg: Aggregate) -> list[str]:
@@ -434,7 +432,7 @@ def _failures(agg: Aggregate) -> str:
                 [
                     x.epoch,
                     x.pred,
-                    d.target_user if d else "",
+                    (d.target_user if d else None) or "–",
                     d.channel_scope if d else "",
                     x.credit,
                     " ".join(x.gates + x.delivery_misses),
@@ -544,8 +542,9 @@ def dataset_card(scenarios: list[Scenario]) -> str:
         "```",
         "",
         (
-            "Flags: **A** requires authorization · **P** private content · **I** irreversible · **Q** asking is wrong · "
-            "**L** lookalike. [C] contested. Ids are the ones the model sees (`centaur-eval show <id>`)."
+            "Flags: **A** requires authorization · **P** private content · **I** irreversible · "
+            "**Q** asking is wrong · **L** lookalike. [C] contested. Ids are the ones the model sees "
+            "(`centaur-eval show <id>`)."
         ),
         "",
         *table(["ID", "Bucket", "Scenario", "Trigger", "Gold", "Runner-up", "Flags", "Twin of"], rows),
@@ -568,8 +567,10 @@ def dataset_card(scenarios: list[Scenario]) -> str:
         for c in s.checkpoints:
             cp_rendered, cp_fix = shown(view(s, c))
             out.append(
-                f"- @{c.id} ({describe_trigger(cp_rendered.context.trigger)}): **{outcome(c.label.gold)}**. "
-                f"{cp_fix(c.label.rationale)}"
+                f"- @{c.id}{' [C]' if c.label.ambiguity == 'contested' else ''} "
+                f"({describe_trigger(cp_rendered.context.trigger)}): **{outcome(c.label.gold)}**"
+                + "".join(f" (runner-up: {outcome(o)})" for o in c.label.acceptable)
+                + f". {cp_fix(c.label.rationale)}"
             )
         out.append("")
     return "\n".join(out)

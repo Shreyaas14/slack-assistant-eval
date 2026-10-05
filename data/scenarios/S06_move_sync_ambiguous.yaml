@@ -102,7 +102,6 @@ label:
     silent: "A direct request from the organizer goes unserved when one question would unblock it."
   decisive_cue:
     msg_ids: [m2, m5]
-    context_path: "calendar[ev1,ev2]"
     position: context
     description: "The calendar shows two weekly syncs Jules organizes, and m2 blocks both days; v1/v2 are unrelated."
   principle_refs: [D4, H-dialog, AM-G10]

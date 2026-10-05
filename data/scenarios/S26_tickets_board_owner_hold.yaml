@@ -176,7 +176,6 @@ label:
     notify: "Leo and Sara both already know about the hold in m19 (RED)."
   decisive_cue:
     msg_ids: [m18, m19]
-    context_path: "channels[#onboarding-squad].purpose + users[leo.park].title"
     position: last
     description: "m18 delegates the filing; m19 is a later hold from the ONB triager, awaiting Sara's answer."
   principle_refs: [AUTH-latest, STALE, RED, H-timing, H-first]

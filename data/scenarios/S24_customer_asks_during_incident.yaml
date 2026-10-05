@@ -111,7 +111,6 @@ label:
     silent: "A billing-run escalation sits 15 minutes unanswered with no sign Ben has seen it (H-first)."
   decisive_cue:
     msg_ids: [m6, m7, v2]
-    context_path: "visible_elsewhere[v2]"
     position: context
     description: "The unanswered customer question (m6/m7) plus Lin's private comms hold leave a private heads-up as the only safe move."
   principle_refs: [D1, D3, H-first, TGT-owner, MS-scope, CTX-PRIV]

@@ -121,7 +121,6 @@ label:
     silent: "The ✅ looks like closure, but Globex is getting ten times the export limit (D2)."
   decisive_cue:
     msg_ids: [m1a, m1b]
-    context_path: "docs[rb1,d2]"
     position: last
     description: "m1a quotes d2's non-export 1,000/min; rb1 sets exports at 100/min; m1b shows Kim relaying 1,000/min to Globex."
   principle_refs: [D2, D5, H-first, TGT-owner, RED, CH-thread]

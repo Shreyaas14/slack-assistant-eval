@@ -115,7 +115,6 @@ label:
     silent: "The condition is met and Acme joins in 15 minutes without the deck."
   decisive_cue:
     msg_ids: [m6, m2]
-    context_path: "calendar[ev1].attachments"
     position: mid
     description: "m6's noon deadline passed with no comments from Hana, and ev1 still lacks the deck."
   principle_refs: [D5, AUTH, STALE, H-timing, AM-G3, MS-no-trivial-confirm]

@@ -67,6 +67,9 @@ A deployed proactive bot never sees a "scenario". It receives message events fro
 
 `validate` enforces all of this (no future messages, trigger timing, membership). Transport details are assumed handled upstream, as they are in production: acks, retries, duplicate or out-of-order events.
 
+Checkpoints replay the same conversation at another moment (earlier, at a first sweep, or later). Each is labeled on
+its own: a main item may assume Centaur stayed silent at an earlier checkpoint where speaking was gold.
+
 ## Repo map
 
 ```
@@ -86,6 +89,7 @@ src/centaur_eval/
   costs.py     the cost matrix and boundary-violation rules
   scoring.py   per-trial scoring and aggregate metrics
   report.py    report.md, failures.md, errors.csv, dataset card
-  stats.py     Wilson intervals, cluster bootstrap, per-class precision/recall
+  stats.py     cluster bootstrap, per-class precision/recall
+  paths.py     repo paths and short content hashes
 results/       published runs (copied from runs/, which is not committed)
 ```

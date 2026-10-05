@@ -1,6 +1,7 @@
 """Pure, deterministic scoring: (traces, items) -> an Aggregate of metrics.
 
-Epochs are averaged per item before intervals, so n is scenarios. Checkpoints and API errors stay out of the headline.
+Headline intervals average epochs per item first (n = scenarios); trial-level tables report counts only.
+Checkpoints and API errors stay out of the headline.
 """
 
 from __future__ import annotations
@@ -35,10 +36,6 @@ class Rate:
     @property
     def value(self) -> float:
         return self.k / self.n if self.n else float("nan")
-
-    @property
-    def ci(self) -> tuple[float, float]:
-        return stats.wilson(self.k, self.n) if self.n else (float("nan"), float("nan"))
 
 
 @dataclass(frozen=True)

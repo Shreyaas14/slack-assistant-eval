@@ -5,7 +5,7 @@ family_id: null
 variant_of: null
 perturbation: null
 bucket: timing
-distractor_msg_ids: [m1, m2, m3, v1, v2, v4]
+distractor_msg_ids: [m1, m2, m3, e1, e2, e4]
 
 context:
   now: "2026-10-14T14:21:00-04:00"
@@ -52,23 +52,23 @@ context:
       attendees: [ben.okafor, victor.lang, zoe.lindqvist, j.ford@tidewaterlogistics.com, procurement@tidewaterlogistics.com]
       external: true
   visible_elsewhere:
-    - id: v1
+    - id: e1
       ts: "2026-10-12T10:07:00-04:00"
       user: tess.romero
       channel: "#deal-desk"
       text: "Globex renewal quote approved: 3-yr, 12% multi-year, standard Net 30. Posted to the opp, AEs can send."
       reactions: [{emoji: "✅", users: [carla.reyes]}]
-    - id: v2
+    - id: e2
       ts: "2026-10-13T09:31:00-04:00"
       user: carla.reyes
       channel: "#deal-desk"
       text: "Initech: legal confirmed we can't offer the MFN clause they asked for. Please keep it out of redlines even if they push on the call."
-    - id: v3
+    - id: e3
       ts: "2026-10-13T16:42:00-04:00"
       user: carla.reyes
       channel: "#deal-desk"
       text: "Tidewater Logistics pricing v3 approved after CFO review: SSO/audit add-on now $14/seat, payment terms Net 30. Updated proposal is in the Tidewater folder; please use v3 for anything going to Tidewater from here on."
-    - id: v4
+    - id: e4
       ts: "2026-10-14T11:15:00-04:00"
       user: tess.romero
       channel: "#deal-desk"
@@ -115,16 +115,15 @@ label:
   acceptable: []
   ambiguity: clear
   rationale: >-
-    Ben is about to send v2, but Carla's v3 post says v3 replaced it with a higher add-on price and Net 30, and nobody has noticed (STALE, H-timing). Pricing is Deal Desk's and the send is Ben's, so warn him rather than act (TGT-owner).
+    Ben is about to send v2, but Carla's e3 post says v3 replaced it with a higher add-on price and Net 30, and nobody has noticed (STALE, H-timing). Pricing is Deal Desk's and the send is Ben's, so warn him rather than act (TGT-owner).
   why_not:
     act: "Sending v3 or swapping Ben's link is an unrequested external pricing send."
     ask: "Nothing awaits Ben's answer; he needs the fact, and a question buries it."
     silent: "Ben sends outdated pricing within minutes, and Victor's 👍 shows nobody caught it."
   decisive_cue:
-    msg_ids: [m5, v3]
-    context_path: "docs[d_v2]; docs[d_v3]"
+    msg_ids: [m5, e3]
     position: context
-    description: "m5 links d_v2, still marked final; only Carla's v3 post and d_v3's newer approval show it was replaced."
+    description: "m5 links d_v2, still marked final; only Carla's e3 post and d_v3's newer approval show it was replaced."
   principle_refs: [STALE, D2, MS-scope, H-timing, TGT-owner, D5]
 
 flags:

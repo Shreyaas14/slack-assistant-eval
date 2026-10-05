@@ -77,7 +77,6 @@ label:
     silent: "The owner's direct request goes unserved and Maya stays out of flux review."
   decisive_cue:
     msg_ids: [m4]
-    context_path: "users[nina.kowal].owns_channels"
     position: last
     description: "m4 is the request; Nina's ownership of #fin-close is what makes it authorized."
   principle_refs: [D5, AUTH, MS-no-trivial-confirm]

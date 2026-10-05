@@ -124,7 +124,6 @@ label:
     notify: "Lena knows the call is at 14:00; that is why she is doing it herself."
   decisive_cue:
     msg_ids: [m7]
-    context_path: "assistant.standing_delegations"
     position: mid
     description: "m7 withdraws the m2 delegation, though context still lists it and the noon condition is met."
   principle_refs: [D2, AUTH-latest, STALE, RED, H-timing]

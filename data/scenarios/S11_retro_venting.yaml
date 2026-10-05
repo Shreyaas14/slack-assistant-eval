@@ -101,7 +101,6 @@ label:
     notify: "Erin is present, reacted 💯, and owns action items; a ping adds nothing."
   decisive_cue:
     msg_ids: [m1, m7]
-    context_path: null
     position: early
     description: "m1 has the facilitator committing to collect action items at the end; m7 is impersonal venting."
   principle_refs: [D2, AUTH-question, AM-G5, H-timing]

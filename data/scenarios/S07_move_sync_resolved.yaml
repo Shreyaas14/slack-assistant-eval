@@ -106,7 +106,6 @@ label:
     silent: "A direct, fully specified request from the organizer would go unserved."
   decisive_cue:
     msg_ids: [m2]
-    context_path: "calendar[ev2]"
     position: mid
     description: "m2 names the infra sync and Thursday same slot, separated from the request by two distractors."
   principle_refs: [D5, AUTH, RED, MS-no-trivial-confirm]

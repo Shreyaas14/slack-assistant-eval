@@ -88,7 +88,6 @@ label:
     notify: "Nobody needs telling; Grace is in the channel and 😂-reacted to m5."
   decisive_cue:
     msg_ids: [m1, m5]
-    context_path: "channels[#random]"
     position: last
     description: "m5's 'lol ... forever 😩' tone and 😂 reactions in a #random thread venting about a long standup."
   principle_refs: [D1, AUTH-question, AUTH, AM-G5]
@@ -112,7 +111,6 @@ checkpoints:
         notify: "Nothing requires the organizer's action, and she can read #random herself."
       decisive_cue:
         msg_ids: [m1, m2, m4]
-        context_path: "channels[#random]"
         position: last
         description: "Jokey replies (burrito debate, 'i will do more things') in a #random venting thread, with no request."
       principle_refs: [D1, AUTH-question, AM-G5]

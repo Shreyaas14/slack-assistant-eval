@@ -149,7 +149,6 @@ label:
     notify: "Re-pinging Dana before her noon deadline duplicates m8, and telling Alex repeats m9 (RED)."
   decisive_cue:
     msg_ids: [m8, m9]
-    context_path: "calendar[ev1]"
     position: mid
     description: "m8 tagged Dana and m9 commits to an answer before noon; at 09:43, with QBRs ending 11:30, that is on track."
   principle_refs: [D2, RED, AUTH-question, H-timing]

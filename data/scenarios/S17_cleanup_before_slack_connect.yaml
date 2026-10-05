@@ -87,7 +87,6 @@ label:
     silent: "The owner's direct request, due before the client joins next week, goes unserved."
   decisive_cue:
     msg_ids: [m6, m3, m5]
-    context_path: "channels[#proj-atlas]; docs[d1]"
     position: last
     description: "'Clean up' follows two different problems (internal pins/history, stale members) without saying which to fix."
   principle_refs: [D4, MS-side-effects, AM-G10, H-dialog, CTX-PRIV]

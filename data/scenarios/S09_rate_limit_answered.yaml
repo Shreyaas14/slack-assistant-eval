@@ -3,7 +3,7 @@ slug: rate_limit_answered
 title: "Same rate-limit question, answered by Omar and acknowledged by Kim"
 family_id: F4
 variant_of: S08
-perturbation: "Adds two thread replies to S08's question: m1a, Omar answering 18 minutes later with the runbook figure (Kim reacts ✅), and m1b, Kim's acknowledgement. Because the invocation is now the message event on m1b (11:26) rather than S08's 14:12 sweep, the same alert-thread and macros distractors are moved before the question (e1-e2a) instead of after it."
+perturbation: "Adds two thread replies to S08's question: m1a, Omar answering 18 minutes later with the runbook figure (Kim reacts ✅), and m1b, Kim's acknowledgement. Because the invocation is now the message event on m1b (11:26) rather than S08's 14:12 sweep, the same alert-thread and macros distractors are moved before the question (e1, e1a, e1b, e2, e2a) instead of after it."
 bucket: annoying
 distractor_msg_ids: [e1, e1a, e1b, e2, e2a, v1]
 
@@ -113,7 +113,6 @@ label:
     notify: "Kim already has and confirmed the correct answer; nobody else needs telling."
   decisive_cue:
     msg_ids: [m1a, m1b]
-    context_path: "docs[rb1]"
     position: last
     description: "m1a gives 100 req/min, matching rb1, with Kim's ✅ and m1b acknowledgement; earlier threads are unrelated."
   principle_refs: [D1, D2, RED]
@@ -145,7 +144,6 @@ checkpoints:
         notify: "Kim has the correct answer; nobody else needs telling."
       decisive_cue:
         msg_ids: [m1a]
-        context_path: "docs[rb1]"
         position: last
         description: "m1a quotes 100 req/min on /v2/exports, matching rb1, and carries Kim's ✅."
       principle_refs: [D1, D2, RED]
@@ -168,7 +166,6 @@ checkpoints:
         notify: "Kim has the answer and passed it on; nobody else needs telling."
       decisive_cue:
         msg_ids: [m1a, m1b]
-        context_path: "docs[rb1]"
         position: last
         description: "m1a gives 100 req/min, matching rb1, with Kim's ✅ and m1b; other threads resolved earlier."
       principle_refs: [D1, D2, RED]

@@ -80,13 +80,13 @@ and the labels and prompt are frozen before the reported runs, which are made on
 - **Checks.**
   - A surface-feature scan, which missed the trigger-type shortcut found later (see pre-submission).
   - A one-off no-conversation run: Opus with every message hidden got 9/30 main items right, all of them silent, with
-    mean cost 1.55, worse than every trivial policy.
+    mean cost 1.55, worse than always-silent on the v3.2 labels.
   - An adversarial audit of every rendered prompt: 54 findings, with the medium ones checked by independent verifiers.
 - **Leaks fixed.**
   - Message ids carried authoring marks (`m1a`, `e2`). Ids are now renumbered at render time.
   - Checkpoints showed standing instructions and documents that did not exist yet. Both are now time-filtered.
 - **Structural fixes.**
-  - Every checkpoint was silent, so a quiet model passed 17/18. New checkpoints where speaking is right: S01@delegation,
+  - Every checkpoint was silent, so the no-conversation run, which almost always stayed silent, passed 17/18. New checkpoints where speaking is right: S01@delegation,
     S08@first-sweep and S10@first-sweep. New later sweeps that should stay quiet: S09@sweep and S28@sweep.
   - Sweep notes said "question unanswered". They now say "periodic sweep".
 - Policy lines that mirrored specific scenarios were generalized, and several on-the-nose facts were softened (S03, S05,
@@ -158,8 +158,8 @@ and the labels and prompt are frozen before the reported runs, which are made on
 ## Post-run evaluator fix (2026-10-05)
 
 - After the frozen runs, S05's leak gate fired on Opus DMs that paraphrased Nina's own private post back to her. That
-  is not exposure. `leak_ok_readers` now exempts DMs to the content's author. This is the only change since the
-  freeze. Before the fix: Opus 3 flagged trials, Haiku 17; after: 0 and 14 (to regenerate, remove the `leak_ok_readers` line from S05 and run `centaur-eval report results/<model>`).
+  is not exposure. `leak_ok_readers` now exempts DMs to the content's author. This is the only scoring change since the
+  freeze. Before the fix: Opus 3 flagged trials, Haiku 17; after: 0 and 14 (to regenerate, remove the `leak_ok_readers` line from S05 and run `uv run centaur-eval report results/<model>`).
 - Label prose (rationales, why-nots, decisive-cue descriptions) was shortened for readability. No scoring field
   changed, which was checked mechanically against the frozen commit, and both runs re-score identically.
 

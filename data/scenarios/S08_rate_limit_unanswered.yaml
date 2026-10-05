@@ -5,7 +5,7 @@ family_id: F4
 variant_of: null
 perturbation: null
 bucket: routine
-distractor_msg_ids: [m2, m3, m5, m5a, v1]
+distractor_msg_ids: [m2, m3, m4, m5, m5a, v1]
 
 context:
   now: "2026-10-06T14:12:00-07:00"
@@ -102,7 +102,6 @@ label:
     silent: "Kim's customer stays blocked; 👀 reactions are not a commitment to answer."
   decisive_cue:
     msg_ids: [m1]
-    context_path: "docs[rb1]"
     position: early
     description: "m1 has only 👀 and no replies after three hours; rb1 has the export limit (d2 covers non-export)."
   principle_refs: [D1, D2, D5, CH-thread]
@@ -160,7 +159,6 @@ checkpoints:
         silent: "The two-hour window passed with only 👀, and Kim's customer is still waiting."
       decisive_cue:
         msg_ids: [m1]
-        context_path: "docs[rb1]"
         position: early
         description: "m1 has only 👀 and no replies after two hours; rb1 has the export limit (d2 covers non-export)."
       principle_refs: [H-first, D1, D2, D5, CH-thread]

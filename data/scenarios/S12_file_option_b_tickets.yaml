@@ -183,7 +183,6 @@ label:
     silent: "A direct, fully specified request from the decision owner would go unserved."
   decisive_cue:
     msg_ids: [m3, m15, m20]
-    context_path: "channels[#onboarding-squad].purpose"
     position: mid
     description: "m3 has the original B list, m15 swaps #3 for a reset toggle, and the channel purpose names ONB."
   principle_refs: [D5, MS-no-trivial-confirm, RED, CH-thread]

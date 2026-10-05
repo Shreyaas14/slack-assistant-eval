@@ -102,7 +102,6 @@ label:
     silent: "The renewal stalls; the only approver hasn't seen it and the 👀 reactors cannot approve."
   decisive_cue:
     msg_ids: [m1]
-    context_path: "docs[dm1] + users[dana.wells].title + users[sam.ortega].title"
     position: context
     description: "The matrix puts >15% at VP Sales only (Dana; Sam is 10-15%); m1 has 4h of 👀, none from Dana."
   principle_refs: [D3, MS-scope, TGT-owner]
@@ -156,7 +155,6 @@ checkpoints:
         silent: "Two hours passed with no reply, no reactor can approve, and Dana hasn't seen it."
       decisive_cue:
         msg_ids: [m1]
-        context_path: "docs[dm1] + users[dana.wells].title + users[sam.ortega].title"
         position: early
         description: "m1 has two hours of 👀, none from Dana; the matrix puts >15% at VP only, Sam at 10-15%."
       principle_refs: [H-first, MS-scope, TGT-owner, D3]

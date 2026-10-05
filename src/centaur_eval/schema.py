@@ -154,7 +154,6 @@ class Outcome(Strict):
 
 class DecisiveCue(Strict):
     msg_ids: list[str] = []
-    context_path: str | None = None
     position: Literal["last", "mid", "early", "context"]
     description: str
 
