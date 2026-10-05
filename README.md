@@ -31,6 +31,16 @@ uv run centaur-eval report <id>                               # re-score saved t
 uv run pytest                                                 # tests, no network
 ```
 
+To reproduce the published runs (30 scenarios + 23 checkpoints × 3 epochs = 159 calls; about $5 for Opus, $1 for Haiku):
+
+```bash
+uv run centaur-eval run --model anthropic/claude-opus-5.5 --checkpoints
+uv run centaur-eval run --model anthropic/claude-opus-5.5 --items S01,S20 --epochs 1   # a quick, cheap smoke test
+```
+
+New OpenRouter accounts are limited to 20 requests per minute per model; if calls fail with 429, use
+`--concurrency 2` and finish with `run --resume <id>` (failed calls are retried, never scored).
+
 `run` options: `--epochs 3` (trials per scenario), `--items S01,S07` (a subset), `--checkpoints` (also run each scenario at its other moments), `--concurrency 4`. Ctrl-C saves finished trials and prints the resume command.
 
 Baselines (`baseline:<name>`): `oracle`, `always-act`, `always-ask`, `always-notify`, `always-silent`, `random`, `keyword`, `keyword-last-message`, and `trigger-rule`, which sees only why Centaur was woken (a check for the trigger-type shortcut: the trigger alone predicts 63% of labels).
