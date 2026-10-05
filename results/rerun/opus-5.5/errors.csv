@@ -1,0 +1,4 @@
+item_id,bucket,gold,acceptable,predictions,mean_cost,violations,decisive_cue,suggested_attribution,open_code,axial_code,attribution,next_fix
+S30@remark,routine,silent,notify,ask ask notify,1.50,,Nikhil's confidential remark (m12) arrives while nobody has asked Centaur for anything.,dataset,,,,
+S17@early,ambiguous,silent,notify,notify notify notify,0.50,,"Hannah's worries (m3, m5) are remarks to the team; the owner hasn't responded and Centaur isn't addressed.",acceptable,,,,
+S29,annoying,notify,act,notify act notify,0.17,,"m7 quotes d2's non-export 1,000/min; d1 sets exports at 100/min; m8 shows Kim relaying 1,000/min to Globex.",acceptable,,,,

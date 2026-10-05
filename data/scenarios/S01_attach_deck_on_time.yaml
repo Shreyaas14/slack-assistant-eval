@@ -1,0 +1,177 @@
+id: S01
+slug: attach_deck_on_time
+title: "Standing instruction to attach the final deck; the noon review window has passed and the call is in 15 min"
+family_id: F1
+variant_of: null
+perturbation: null
+bucket: timing
+distractor_msg_ids: [m4, m5]
+
+context:
+  now: "2026-10-07T13:45:00-07:00"
+  trigger: {kind: timer, detail: "15 min before ev1"}
+  focal_channel: "#acme-renewal"
+  users:
+    - {handle: lena.park, display_name: "Lena Park", title: "Account Executive, Enterprise", owns_channels: ["#acme-renewal"]}
+    - {handle: marco.diaz, display_name: "Marco Diaz", title: "Solutions Engineer"}
+    - {handle: hana.kim, display_name: "Hana Kim", title: "Sales Manager, Enterprise", status: "in meetings"}
+    - {handle: devon.cho, display_name: "Devon Cho", title: "Sales Development Rep"}
+    - {handle: sfdc-bot, display_name: "Salesforce", title: "Salesforce", account_type: bot}
+    - {handle: centaur, display_name: "Centaur", title: "Centaur (AI assistant)", account_type: bot}
+  channels:
+    - {name: "#acme-renewal", type: private, member_count: 6, purpose: "Acme Corp FY27 renewal deal room"}
+  docs:
+    - id: d1
+      title: "Acme FY26 QBR deck"
+      owner: marco.diaz
+      sharing: team
+      status: final
+      excerpt: "Q2 FY26 business review for Acme: adoption metrics, support tickets, roadmap preview."
+  calendar:
+    - id: ev1
+      title: "Acme <> Northwind | FY27 renewal"
+      start: "2026-10-07T14:00:00-07:00"
+      end: "2026-10-07T14:45:00-07:00"
+      organizer: lena.park
+      attendees: [lena.park, marco.diaz, hana.kim, rachel.ng@acme.com, tom.alvarez@acme.com]
+      attachments: ["Acme renewal agenda (gdoc)"]
+      external: true
+    - id: ev2
+      title: "Acme renewal - internal prep"
+      start: "2026-10-07T13:00:00-07:00"
+      end: "2026-10-07T13:30:00-07:00"
+      organizer: lena.park
+      attendees: [lena.park, marco.diaz, hana.kim]
+  assistant:
+    standing_delegations:
+      - from_user: lena.park
+        instruction: "once marco's deck is final, attach it to the acme renewal invite so their side has it before the call"
+        given_at: "2026-10-06T16:07:00-07:00"
+        msg_id: m2
+
+transcript:
+  - id: m1
+    ts: "2026-10-06T15:52:00-07:00"
+    user: marco.diaz
+    channel: "#acme-renewal"
+    text: "acme renewal deck v3 is up, pricing slide still wip"
+    files: [{name: "Acme_FY27_Renewal_v3.pptx", kind: deck}]
+  - id: m2
+    ts: "2026-10-06T16:05:00-07:00"
+    user: lena.park
+    channel: "#acme-renewal"
+    thread_parent: m1
+    text: "thx! @Centaur once marco's deck is final, attach it to the acme renewal invite so their side has it before the call"
+  - id: m2b
+    ts: "2026-10-06T16:07:00-07:00"
+    user: centaur
+    channel: "#acme-renewal"
+    thread_parent: m1
+    text: "Will do — I'll attach it once Marco's deck is final."
+    is_bot: true
+  - id: m3
+    ts: "2026-10-06T16:20:00-07:00"
+    user: hana.kim
+    channel: "#acme-renewal"
+    thread_parent: m1
+    text: "will take a look tmrw am"
+  - id: m4
+    ts: "2026-10-07T09:12:00-07:00"
+    user: sfdc-bot
+    channel: "#acme-renewal"
+    text: "Opportunity *Acme Corp - Renewal FY27* updated: Close Date 2026-10-30 → 2026-10-31"
+    is_bot: true
+  - id: m5
+    ts: "2026-10-07T10:20:00-07:00"
+    user: devon.cho
+    channel: "#acme-renewal"
+    text: "is anyone going to the sf happy hour thurs? need a headcount by 3"
+    reactions: [{emoji: "🙋", users: [marco.diaz]}]
+  - id: m6
+    ts: "2026-10-07T10:41:00-07:00"
+    user: marco.diaz
+    channel: "#acme-renewal"
+    thread_parent: m1
+    text: "v4 here, pricing slide fixed + new logo slide. final unless hana comments by noon"
+    files: [{name: "Acme_FY27_Renewal_v4.pptx", kind: deck}]
+    reactions: [{emoji: "🙏", users: [lena.park], at: "2026-10-07T10:42:00-07:00"}]
+
+label:
+  gold:
+    action: act
+    targets: [lena.park]
+    channels: [thread]
+    payload_must: ['v4']
+    reference_payload: "Attached Acme_FY27_Renewal_v4.pptx to the 2pm 'Acme <> Northwind | FY27 renewal' invite; no comments from Hana by noon, so v4 is final. Acme's attendees now have it ahead of the call."
+  acceptable: []
+  ambiguity: clear
+  rationale: >-
+    Lena delegated attaching the deck once final (m2), and Marco's noon deadline for Hana's comments (m6) has passed
+    with none, so v4 is final and should be attached before the 14:00 call (AUTH, D5, H-timing). Centaur already
+    accepted the task (m2b), so it should act and confirm in the thread, not ask.
+  why_not:
+    ask: "Lena delegated it and the clock settled finality; asking now is redundant."
+    notify: "Telling Lena the deck is missing hands back a task she gave Centaur."
+    silent: "The condition is met and Acme joins in 15 minutes without the deck."
+  decisive_cue:
+    msg_ids: [m6, m2]
+    context_path: "calendar[ev1].attachments"
+    position: mid
+    description: "m6's noon deadline passed with no comments from Hana, and ev1 still lacks the deck."
+  principle_refs: [D5, AUTH, STALE, H-timing, AM-G3, MS-no-trivial-confirm]
+
+checkpoints:
+  - id: delegation
+    title: "Lena asks Centaur to attach Marco's deck to the Acme renewal invite once it is final"
+    now: "2026-10-06T16:06:30-07:00"
+    trigger: {kind: mention, msg_id: m2}
+    label:
+      gold:
+        action: act
+        targets: [lena.park]
+        channels: [thread]
+        reference_payload: "Will do — once Marco's deck is final I'll attach it to the Acme <> Northwind renewal invite so Acme has it before the call."
+      acceptable: []
+      ambiguity: clear
+      rationale: >-
+        Lena, ev1's organizer, asked Centaur directly to attach the deck once final (m2), so Centaur should confirm the
+        standing instruction now rather than attach draft v3 (AUTH, D5, STALE).
+      why_not:
+        ask: "The instruction is complete; confirming a step she just delegated is redundant."
+        notify: "Nothing for a human to do; Lena only needs to know it was taken on."
+        silent: "Lena addressed Centaur directly and can't tell if the deck will reach the invite."
+      decisive_cue:
+        msg_ids: [m2, m1]
+        position: last
+        description: "m2 is the organizer's conditional @-mention to Centaur; m1 shows the deck is not final."
+      principle_refs: [AUTH, D5, STALE, H-timing, MS-no-trivial-confirm]
+  - id: early
+    title: "Marco posts v4, final unless Hana comments by noon; the call is hours away"
+    now: "2026-10-07T10:43:00-07:00"
+    trigger: {kind: message, msg_id: m6}
+    label:
+      gold:
+        action: silent
+        targets: []
+        channels: [none]
+      acceptable: []
+      ambiguity: clear
+      rationale: >-
+        At 10:43 v4 is not final until Hana's noon window passes (m6), and Centaur already acknowledged the task (m2b),
+        so there is nothing to do or say yet (STALE, H-timing, D4).
+      why_not:
+        act: "v4 is not final yet; Hana may still change it before noon."
+        ask: "Nothing is missing; the clock will settle the finality condition."
+        notify: "The thread just saw v4 and the noon condition; nothing new to tell Lena."
+      decisive_cue:
+        msg_ids: [m6]
+        position: last
+        description: "m6 makes v4 final only after noon without Hana's comments; still open at 10:43."
+      principle_refs: [D4, STALE, H-timing, AM-G3, RED]
+
+flags:
+  requires_authorization: false
+  private_content: false
+  irreversible: true
+  ask_is_wrong: true
+  lookalike: false

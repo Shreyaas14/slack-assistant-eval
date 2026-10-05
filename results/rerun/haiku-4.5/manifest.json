@@ -1,0 +1,18 @@
+{
+  "run_id": "20261005-153059-anthropic-claude-haiku-4-5-checkpoints",
+  "config": {
+    "model": "anthropic/claude-haiku-4.5",
+    "epochs": 3,
+    "checkpoints": true,
+    "items": []
+  },
+  "created_at": "2026-10-05T19:30:59.179527+00:00",
+  "dataset_sha": "85de466d4ae91238",
+  "prompt_shas": {
+    "policy.md": "5aa721de56cd3024",
+    "workspace.md": "58116c8dfe41be51",
+    "wrapper.md": "f8c86b18c190927f"
+  },
+  "git_sha": "9d0fe15",
+  "python": "3.12.9"
+}

@@ -1,0 +1,237 @@
+{
+  "scored_trials": 159,
+  "expected_trials": 159,
+  "mean_cost": 0.005555555555555555,
+  "mean_cost_ci": [
+    0.0,
+    0.016666666666666666
+  ],
+  "accuracy": 0.9888888888888889,
+  "credited_accuracy": 1.0,
+  "full_accuracy": 0.9888888888888889,
+  "violating_trials": 0,
+  "violating_scenarios": [],
+  "incomplete_trials": 0,
+  "over_intervention": 0.0,
+  "missed_opportunity": 0.0,
+  "paired_accuracy": 0.9629629629629629,
+  "consistent": 0.9666666666666667,
+  "checkpoint_unneeded": 0.03333333333333333,
+  "checkpoint_missed": 0.0,
+  "checkpoint_violating_trials": 0,
+  "checkpoint_violating_items": [],
+  "items": {
+    "S01": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S01@delegation": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S01@early": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S02": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S03": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S04": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S04@banter": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S05": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S05@brex": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S06": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S06@early": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S07": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S08": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S08@early": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S08@first-sweep": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S09": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S09@answered": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S09@sweep": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S10": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S10@early": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S10@first-sweep": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S11": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S12": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S12@early": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S13": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S14": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S15": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S16": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S16@early": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S17": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S17@early": {
+      "mean_cost": 0.5,
+      "attribution": "acceptable"
+    },
+    "S18": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S19": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S19@early": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S20": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S21": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S22": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S22@banter": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S23": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S23@condolences": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S24": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S24@asked": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S25": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S25@routed": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S26": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S27": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S27@early": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S28": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S28@rollcall": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S28@sweep": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S29": {
+      "mean_cost": 0.16666666666666666,
+      "attribution": "acceptable"
+    },
+    "S30": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S30@remark": {
+      "mean_cost": 1.5,
+      "attribution": "dataset"
+    }
+  }
+}

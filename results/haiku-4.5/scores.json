@@ -1,0 +1,247 @@
+{
+  "scored_trials": 159,
+  "expected_trials": 159,
+  "mean_cost": 0.8833333333333333,
+  "mean_cost_ci": [
+    0.4942528735632184,
+    1.3666666666666667
+  ],
+  "accuracy": 0.6666666666666666,
+  "credited_accuracy": 0.7222222222222222,
+  "full_accuracy": 0.6222222222222222,
+  "violating_trials": 9,
+  "violating_scenarios": [
+    "S03",
+    "S15",
+    "S16",
+    "S20",
+    "S27"
+  ],
+  "incomplete_trials": 0,
+  "over_intervention": 0.18181818181818182,
+  "missed_opportunity": 0.08771929824561403,
+  "paired_accuracy": 0.5185185185185185,
+  "consistent": 0.4,
+  "checkpoint_unneeded": 0.3333333333333333,
+  "checkpoint_missed": 0.2222222222222222,
+  "checkpoint_violating_trials": 5,
+  "checkpoint_violating_items": [
+    "S01@early",
+    "S24@asked",
+    "S27@early"
+  ],
+  "items": {
+    "S01@delegation": {
+      "mean_cost": 1.6666666666666667,
+      "attribution": "model"
+    },
+    "S01": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S01@early": {
+      "mean_cost": 6.0,
+      "attribution": "boundary"
+    },
+    "S02": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S04": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S03": {
+      "mean_cost": 3.6666666666666665,
+      "attribution": "boundary"
+    },
+    "S04@banter": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S05": {
+      "mean_cost": 0.16666666666666666,
+      "attribution": "acceptable"
+    },
+    "S05@brex": {
+      "mean_cost": 1.0,
+      "attribution": "model-intermittent"
+    },
+    "S06": {
+      "mean_cost": 1.6666666666666667,
+      "attribution": "model-intermittent"
+    },
+    "S06@early": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S07": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S08": {
+      "mean_cost": 0.6666666666666666,
+      "attribution": "model-intermittent"
+    },
+    "S08@early": {
+      "mean_cost": 6.0,
+      "attribution": "model"
+    },
+    "S08@first-sweep": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S09": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S09@answered": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S09@sweep": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S10": {
+      "mean_cost": 0.6666666666666666,
+      "attribution": "delivery"
+    },
+    "S10@early": {
+      "mean_cost": 3.0,
+      "attribution": "model"
+    },
+    "S10@first-sweep": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S11": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S12": {
+      "mean_cost": 1.0,
+      "attribution": "model"
+    },
+    "S12@early": {
+      "mean_cost": 2.3333333333333335,
+      "attribution": "model"
+    },
+    "S13": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S14": {
+      "mean_cost": 3.0,
+      "attribution": "model"
+    },
+    "S15": {
+      "mean_cost": 2.6666666666666665,
+      "attribution": "boundary"
+    },
+    "S16": {
+      "mean_cost": 1.6666666666666667,
+      "attribution": "boundary"
+    },
+    "S16@early": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S17": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S17@early": {
+      "mean_cost": 0.5,
+      "attribution": "acceptable"
+    },
+    "S18": {
+      "mean_cost": 0.3333333333333333,
+      "attribution": "delivery"
+    },
+    "S19": {
+      "mean_cost": 0.6666666666666666,
+      "attribution": "model-intermittent"
+    },
+    "S19@early": {
+      "mean_cost": 3.0,
+      "attribution": "model"
+    },
+    "S20": {
+      "mean_cost": 5.0,
+      "attribution": "boundary"
+    },
+    "S21": {
+      "mean_cost": 0.6666666666666666,
+      "attribution": "model-intermittent"
+    },
+    "S22": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S22@banter": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S23": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S23@condolences": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S24": {
+      "mean_cost": 0.6666666666666666,
+      "attribution": "model-intermittent"
+    },
+    "S24@asked": {
+      "mean_cost": 3.0,
+      "attribution": "boundary"
+    },
+    "S25": {
+      "mean_cost": 1.0,
+      "attribution": "model-intermittent"
+    },
+    "S25@routed": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S26": {
+      "mean_cost": 0.5,
+      "attribution": "acceptable"
+    },
+    "S27": {
+      "mean_cost": 1.8333333333333333,
+      "attribution": "boundary"
+    },
+    "S27@early": {
+      "mean_cost": 0.6666666666666666,
+      "attribution": "boundary"
+    },
+    "S28": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S28@rollcall": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S28@sweep": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S29": {
+      "mean_cost": 0.6666666666666666,
+      "attribution": "model-intermittent"
+    },
+    "S30": {
+      "mean_cost": 0.0,
+      "attribution": "pass"
+    },
+    "S30@remark": {
+      "mean_cost": 0.5,
+      "attribution": "acceptable"
+    }
+  }
+}
