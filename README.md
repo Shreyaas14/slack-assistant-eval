@@ -48,7 +48,7 @@ Baselines (`baseline:<name>`): `oracle`, `always-act`, `always-ask`, `always-not
 A run writes `runs/<id>/`:
 - `manifest.json`: the run's settings and hashes of the dataset and prompts;
 - `traces.jsonl`: one row per (scenario or checkpoint, epoch) with the full prompt, raw response and parsed decision. No labels, so runs can be re-scored after a label fix;
-- `report.md`: verdict against trivial baselines, confusion matrix, per-class results, intervention behavior, checkpoints, a per-scenario grid;
+- `report.md`: verdict against trivial baselines, confusion matrix, per-class precision/recall/F1, macro-F1, balanced accuracy, Cohen's κ, intervention behavior, checkpoints, a per-scenario grid;
 - `failures.md`: every failing scenario, with its conversation and each trial's output and reasoning;
 - `errors.csv`: one row per failure with a suggested attribution (boundary, delivery, acceptable, evaluator, dataset, model, model-intermittent) and columns for hand coding, kept across re-scoring;
 - `scores.json`: the headline metrics and per-item costs, for scripts.

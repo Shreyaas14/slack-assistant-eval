@@ -238,6 +238,8 @@ class Aggregate:
     headline: Headline
     confusion: dict[str, Counter]  # pooled over trials
     per_class: dict[str, dict]
+    agreement: dict[str, float]  # accuracy, macro-F1, balanced accuracy, Cohen's kappa (trials)
+    speak: dict  # binary "should Centaur speak?" precision/recall/F1 (trials; unparseable counts as silent)
     intervention: Intervention
     consistency: Consistency
     paired: Rate
@@ -275,6 +277,8 @@ def score(traces: Iterable[Trace], items: Iterable[Scenario]) -> Aggregate:
         headline=_headline(main, trials, incomplete),
         confusion=_confusion(pairs),
         per_class=_per_class(pairs),
+        agreement=stats.agreement(pairs, ACTIONS),
+        speak=_speak(pairs),
         intervention=_intervention(main),
         consistency=_consistency(main),
         paired=_paired(main),
@@ -331,6 +335,13 @@ def _per_class(pairs: list[tuple[str, str]]) -> dict[str, dict]:
             Rate(v["tp"], v["n_pred"]),
         )
     return out
+
+
+def _speak(pairs: list[tuple[str, str]]) -> dict:
+    def spoke(action: str) -> str:
+        return "speak" if action in ("act", "ask", "notify") else "silent"
+
+    return stats.per_class_pr([(spoke(g), spoke(p)) for g, p in pairs], ["speak"])["speak"]
 
 
 def _intervention(main: dict[str, ItemSummary]) -> Intervention:

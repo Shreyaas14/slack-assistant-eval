@@ -23,18 +23,18 @@
 
 Trivial policies on the same scenarios and cost matrix, one epoch each. `trigger-rule` sees only why Centaur was woken; a model near it may be leaning on the trigger shortcut.
 
-| Policy | Mean cost | Accuracy | Scenarios with a violation | Over-intervention | Missed |
-|---|---|---|---|---|---|
-| **anthropic/claude-opus-5.5** | 0.01 | 99% | 0 | 0% | 0% |
-| oracle | 0.00 | 100% | 0 | 0% | 0% |
-| always-act | 4.28 | 20% | 14 | 100% | 0% |
-| always-ask | 1.17 | 27% | 5 | 91% | 0% |
-| always-notify | 1.83 | 17% | 6 | 91% | 0% |
-| always-silent | 1.27 | 37% | 0 | 0% | 100% |
-| random | 1.75 | 33% | 4 | 45% | 53% |
-| keyword | 2.37 | 43% | 6 | 27% | 37% |
-| keyword-last-message | 1.90 | 47% | 5 | 9% | 47% |
-| trigger-rule | 0.68 | 63% | 1 | 9% | 26% |
+| Policy | Mean cost | Accuracy | Macro-F1 | κ | Scenarios with a violation | Over-intervention | Missed |
+|---|---|---|---|---|---|---|---|
+| **anthropic/claude-opus-5.5** | 0.01 | 99% | 0.98 | 0.98 | 0 | 0% | 0% |
+| oracle | 0.00 | 100% | 1.00 | 1.00 | 0 | 0% | 0% |
+| always-act | 4.28 | 20% | 0.08 | 0.00 | 14 | 100% | 0% |
+| always-ask | 1.17 | 27% | 0.11 | 0.00 | 5 | 91% | 0% |
+| always-notify | 1.83 | 17% | 0.07 | 0.00 | 6 | 91% | 0% |
+| always-silent | 1.27 | 37% | 0.13 | 0.00 | 0 | 0% | 100% |
+| random | 1.75 | 33% | 0.25 | 0.04 | 4 | 45% | 53% |
+| keyword | 2.37 | 43% | 0.27 | 0.21 | 6 | 27% | 37% |
+| keyword-last-message | 1.90 | 47% | 0.28 | 0.23 | 5 | 9% | 47% |
+| trigger-rule | 0.68 | 63% | 0.49 | 0.47 | 1 | 9% | 26% |
 
 ## Confusion matrix (trials)
 
@@ -47,7 +47,9 @@ Trivial policies on the same scenarios and cost matrix, one epoch each. `trigger
 
 Credited action (gold or runner-up) delivered wrongly (trials): target 0, channel 0, missing required content 0.
 
-## Per class (trials)
+## Classification metrics (trials)
+
+Accuracy 99% · macro-F1 0.98 · balanced accuracy 98% · Cohen's κ 0.98
 
 | Class | Recall | Precision | F1 |
 |---|---|---|---|
@@ -55,6 +57,8 @@ Credited action (gold or runner-up) delivered wrongly (trials): target 0, channe
 | ask | 100% (24/24) | 100% (24/24) | 1.00 |
 | notify | 93% (14/15) | 100% (14/14) | 0.97 |
 | silent | 100% (33/33) | 100% (33/33) | 1.00 |
+
+Speak vs. stay silent (act/ask/notify vs. silent): precision 100%, recall 100%, F1 1.00.
 
 ## Intervention behavior (trials)
 

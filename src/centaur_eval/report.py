@@ -242,12 +242,23 @@ def _baseline_table(agg: Aggregate, baselines: dict[str, Aggregate], model: str)
             name,
             num(h.mean_cost),
             pct(h.accuracy),
+            num(a.agreement["macro_f1"]),
+            num(a.agreement["kappa"]),
             len(h.gate_items),
             pct(i.over_intervention.value),
             pct(i.missed_opportunity.value),
         ]
 
-    header = ["Policy", "Mean cost", "Accuracy", "Scenarios with a violation", "Over-intervention", "Missed"]
+    header = [
+        "Policy",
+        "Mean cost",
+        "Accuracy",
+        "Macro-F1",
+        "κ",
+        "Scenarios with a violation",
+        "Over-intervention",
+        "Missed",
+    ]
     return [
         "## Baselines",
         "",
@@ -280,7 +291,22 @@ def _confusion(agg: Aggregate) -> list[str]:
 
 def _per_class(agg: Aggregate) -> list[str]:
     rows = [[c, rate(v["recall_rate"]), rate(v["precision_rate"]), num(v["f1"])] for c, v in agg.per_class.items()]
-    return ["## Per class (trials)", "", *table(["Class", "Recall", "Precision", "F1"], rows)]
+    a, sp = agg.agreement, agg.speak
+    return [
+        "## Classification metrics (trials)",
+        "",
+        (
+            f"Accuracy {pct(a['accuracy'])} · macro-F1 {num(a['macro_f1'])} · balanced accuracy "
+            f"{pct(a['balanced_accuracy'])} · Cohen's κ {num(a['kappa'])}"
+        ),
+        "",
+        *table(["Class", "Recall", "Precision", "F1"], rows),
+        "",
+        (
+            f"Speak vs. stay silent (act/ask/notify vs. silent): precision {pct(sp['precision'])}, recall "
+            f"{pct(sp['recall'])}, F1 {num(sp['f1'])}."
+        ),
+    ]
 
 
 def _intervention(agg: Aggregate) -> list[str]:
@@ -499,6 +525,12 @@ def _scores_json(a: Aggregate, cov: Coverage) -> dict:
         "over_intervention": a.intervention.over_intervention.value,
         "missed_opportunity": a.intervention.missed_opportunity.value,
         "paired_accuracy": a.paired.value,
+        "macro_f1": a.agreement["macro_f1"],
+        "balanced_accuracy": a.agreement["balanced_accuracy"],
+        "kappa": a.agreement["kappa"],
+        "speak_precision": a.speak["precision"],
+        "speak_recall": a.speak["recall"],
+        "speak_f1": a.speak["f1"],
         "consistent": a.consistency.all_epochs_pass,
         "checkpoint_unneeded": cp.unneeded.value if cp else None,
         "checkpoint_missed": cp.missed.value if cp else None,

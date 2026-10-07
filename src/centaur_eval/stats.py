@@ -56,3 +56,21 @@ def per_class_pr(pairs: Sequence[tuple[str, str]], classes: Sequence[str]) -> di
             "f1": f1,
         }
     return out
+
+
+def agreement(pairs: Sequence[tuple[str, str]], classes: Sequence[str]) -> dict[str, float]:
+    """Accuracy, macro-F1, balanced accuracy (mean recall), and Cohen's kappa (agreement beyond chance)."""
+    n = len(pairs)
+    if not n:
+        return dict.fromkeys(("accuracy", "macro_f1", "balanced_accuracy", "kappa"), float("nan"))
+    pr = per_class_pr(pairs, classes)
+    observed = sum(g == p for g, p in pairs) / n
+    expected = sum(pr[c]["n_gold"] * pr[c]["n_pred"] for c in classes) / (n * n)
+    f1s = [v["f1"] if v["f1"] == v["f1"] else 0.0 for v in pr.values() if v["n_gold"]]
+    recalls = [v["recall"] for v in pr.values() if v["n_gold"]]
+    return {
+        "accuracy": observed,
+        "macro_f1": sum(f1s) / len(f1s),
+        "balanced_accuracy": sum(recalls) / len(recalls),
+        "kappa": (observed - expected) / (1 - expected) if expected < 1 else float("nan"),
+    }
